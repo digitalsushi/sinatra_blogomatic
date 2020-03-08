@@ -1,43 +1,30 @@
 sinatra\_blogomatic
+
+
 ===================
 
-Ruby Sinatra application for hosting a few Gmail API endpoints.
+Elevator Pitch: Modern email editors are 80% of what you need 
+to edit the HTML of a website. Mobile phones, corporate work email,
+web email, are all basically good enough to write a simple webpage
+with basic formatting and inline images. What if we just considered
+those clients to be 'good enough' and relied on them as authoring
+tools for pet websites? I can easily write a post from my phone
+including a few photos, of my latest woodworking projects, and
+I can take a lunch break to muse on the latest current events.
 
-This commit adds Gmail API support for
-using email as a work queue. A specific
-email query will be automatically saved
-onto the local file system for other utilities
-to discover and work upon.
+Emailing myself a rich email is easy to automatically download
+using the Gmail API, and then converting it into a webpage for
+publishing. This project gets you about 60% of the way there.
 
-The main goal of this was to be able to
-email a blog article so that some other script
-can pick it up later, say in a cron entry.
+It's MVP, it's untested, it's got tons of other bits that are not
+relevant. This is not here to be a resume booster. It's here
+to share some ruby gmail api code, because it was a bit of a pain
+to figure it out.
 
-Emails with attachments are minimally supported, so long
-as their original authoring software was one of gmail,
-outlook express 2016 mac, or the outlook owa web client. None
-of these are being tracked for changes, you're on your own.
+Please read the commit log for some caveats.
 
-Emails with image attachments will be converted from the
-email content-id src img format into a web format, so long
-as again, they are from the above list of email clients. There
-does not seem to be a standard way of encoding the original
-email filename, so it's a treasure hunt to find them.
+===================
 
-You could write a little script to shovel them into a static
-S3 blog, or any other post processing you can think of.
-
-Additionally, there is a little support for other commands,
-but only as a bit of a scaffolding right now. I might add
-support for this but I am making zero promises about anything.
-
-Mostly I am sharing this code because the gmail API is largely
-undocumented in the way of examples. I fully disclaim that
-my code is idiomatic, and you should not copy any of the code
-in this repo as a source for learning. There are far smarter people
-sharing their code for that.
-
-Good luck!
 
 Helpful articles about JSON Web Token and ruby:
 
