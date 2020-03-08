@@ -4,14 +4,18 @@ require 'sinatra'
 require 'openssl'
 require 'jwt'
 
+require_relative 'models/text_analyzer.rb'
+require_relative 'models/gmail.rb'
+require_relative 'models/job_scanner.rb'
+
 
 ######
 # first we load up the private and public keys that we will use to sign and verify our JWT token
 # using RS256 algo
 ######
 
-signing_key_path = File.expand_path("../app.rsa", __FILE__)
-verify_key_path = File.expand_path("../app.rsa.pub", __FILE__)
+signing_key_path = File.expand_path("../keys/app.rsa", __FILE__)
+verify_key_path = File.expand_path("../keys/app.rsa.pub", __FILE__)
 
 signing_key = ""
 verify_key = ""
@@ -26,6 +30,8 @@ end
 
 set :signing_key, signing_key
 set :verify_key, verify_key
+set :port, 8080
+set :bind, '0.0.0.0'
 
 # enable sessions which will be our default for storing the token
 enable :sessions
@@ -92,7 +98,7 @@ helpers do
 
       @user_id = payload["user_id"]
 
-    rescue JWT::DecodeError => e
+    rescue JWT::DecodeError 
       return false
     end
   end
@@ -122,7 +128,7 @@ post '/login' do
     # on future visists to the site
     
     headers = {
-      exp: Time.now.to_i + 20 #expire in 20 seconds
+      exp: Time.now.to_i + 3600 #expire in an hour
     }
 
     @token = JWT.encode({user_id: 123456}, settings.signing_key, "RS256", headers)
@@ -133,4 +139,26 @@ post '/login' do
     @message = "Username/Password failed."
     erb :login
   end
+end
+
+post '/' do
+  text_from_user = params[:user_text]
+  @analyzed_text = TextAnalyzer.new(text_from_user)
+  erb :results
+end
+
+get '/gmail' do
+  gmail = GmailTransport.new
+#  gmail.download_msgs_by_query("subject:shshss8s7s7shs76s7syus")    # from OWA
+#  gmail.download_msgs_by_query("subject:sks8s83j37ss8s88s8s98s8s")   # from gmail
+#  gmail.download_msgs_by_query("subject:kjdsfakjsas")   # from outlook thick client.
+  gmail.download_msgs_by_query("subject:supbuddy=")   # testing the subject parser, now.
+  gmail.send_email_demo1
+  "cool"
+end
+
+get '/jobs' do
+  content_type :text
+  job = JobScanner.new
+  job.process
 end

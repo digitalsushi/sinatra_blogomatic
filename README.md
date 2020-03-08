@@ -32,6 +32,6 @@ This app will load app.rsa and app.rsa.pub as sign and verify keys for the JWT e
 
 the app.rsa and app.rsa.pub were generated with:
 
-`openssl genrsa -out app.rsa 2048`
+`openssl genrsa -out keys/app.rsa 2048`
 
-`openssl rsa -in app.rsa -pubout > app.rsa.pub`
+`openssl rsa -in keys/app.rsa -pubout > keys/app.rsa.pub`
