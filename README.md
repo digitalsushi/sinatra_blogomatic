@@ -1,8 +1,5 @@
 sinatra\_blogomatic
 
-
-===================
-
 Elevator Pitch: Modern email editors are 80% of what you need 
 to edit the HTML of a website. Mobile phones, corporate work email,
 web email, are all basically good enough to write a simple webpage
@@ -10,10 +7,12 @@ with basic formatting and inline images. What if we just considered
 those clients to be 'good enough' and relied on them as authoring
 tools for pet websites? I can easily write a post from my phone
 including a few photos, of my latest woodworking projects, and
-I can take a lunch break to muse on the latest current events.
+I can take a lunch break with my work email to muse on the latest 
+current events. (Although I like to keep my work and home code
+separate - you do whatever you like.)
 
-Emailing myself a rich email is easy to automatically download
-using the Gmail API, and then converting it into a webpage for
+A rich content email can be automatically downloaded
+using the Gmail API, and then converted to a webpage for
 publishing. This project gets you about 60% of the way there.
 
 It's MVP, it's untested, it's got tons of other bits that are not
